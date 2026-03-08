@@ -1,23 +1,38 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/pj8M188g)
-# Classification Task
 
-## Task
+## Description
+- **keras-classification-task.ipynb**: contains data preprocessing, model training, early stopping, dropout, and evaluation.
+- **deploy.py**: FastAPI application used to serve predictions.
+- **model_weights.pkl**: saved trained model weights.
+- **scaler_weights.pkl**: saved scaler used for feature preprocessing.
 
-Solve the classification task using the provided notebook:
+## Running the API
 
-```
-keras-classification-task.ipynb
-```
+Run the FastAPI application:
 
-After completing the task, deploy your trained model using FastAPI.
+```bash
+python -m uvicorn deploy:app --reload
 
-## Project Structure
+Open the API documentation:
 
-Your project should follow this structure:
+http://127.0.0.1:8000/docs
+Prediction Endpoint
 
-```
-keras-classification-task.ipynb
-deploy.py
-model_weights.pkl
-scaler_weights.pkl
-```
+POST /predict
+
+Input example:
+
+{
+  "features": [17.99, 10.38, 122.8, 1001.0, 0.1184, 0.2776, 0.3001, 0.1471, 0.2419, 0.0787, 1.095, 0.9053, 8.589, 153.4, 0.0064, 0.049, 0.0537, 0.0159, 0.03, 0.0062, 25.38, 17.33, 184.6, 2019.0, 0.1622, 0.6656, 0.7119, 0.2654, 0.4601, 0.1189]
+}
+
+Output example:
+
+{
+  "prediction": 0,
+  "probability": 0.0011
+}
+Notes
+
+The model expects 30 input features.
+
+The scaler is applied before making predictions to ensure consistency with the training process.
